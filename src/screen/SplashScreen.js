@@ -4,14 +4,12 @@ import { View, Text,Image,StyleSheet } from 'react-native';
 import {AppImages} from '../images/index'
 import AppStyle from '../config/AppStyle' 
 
+import Logo from '../component/AppLogoFun'
+
 function SplashScreen(){
     return(
         <View style={styles.container}>
-            <View style={styles.logoView}>
-                <Image source={
-                    AppImages.AppLogo
-                }  />
-            </View>
+           <Logo/>
         </View>
     )
 }
