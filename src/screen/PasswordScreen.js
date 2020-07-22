@@ -1,12 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { View, Text , StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 
 import Logo from '../component/AppLogoFun'
 import AppStyle from '../config/AppStyle'
 
-import API from '../lib/API/index'
-import { VERIFY_PASS_PATH } from '../config/GlobalStatics'
-
+import WithUser from '../hoc/WithUser'
 
 
 function PasswordScreen(props) {
@@ -17,21 +15,31 @@ function PasswordScreen(props) {
 
   console.log("Password Para : ", props);
 
-  const verifypassword = async()=>{
-    const { navigation:{navigate},route:{ params:{email:{Username}}} } = props;
+  useEffect(()=>{
+  const  { UserData : {error,errorStatus}} = props;
 
-    // console.log("email testing : ",Username);
+  if(errorStatus==true)
+  {
+    setsuggestion('Enter the valid password used within BasicCode Complaince');
+  }
+
+  },[suggest]);
+
+  const verifypassword = async()=>{
+    const { navigation:{navigate},route:{ params:{email:{Username}}}, VerifyPassReq, UserData } = props;
+
     const data = {"password":password,"UserName":Username};
     console.log("data L: ",data);
-    await API(VERIFY_PASS_PATH, data, 'post', null).then(
-      json=>{
-        console.log("data form pass :", json);
 
-      }
-    ).catch(e=>{
-      console.log("Error form Password : ", e);
+    const a  = await VerifyPassReq(data);
+    console.log(" a : ",a );
+    if(UserData.errorStatus == true)
+    {
       setsuggestion('Enter the valid password used within BasicCode Complaince');
-    })
+    }
+    else{
+      navigate("Home");
+    }
     
   }
 
@@ -44,7 +52,7 @@ function PasswordScreen(props) {
         secureTextEntry={true}
         autoCapitalize={'none'}
         value={password} onChangeText={text=>setpassword(text)} style={styles.passwordInput} />
-        <View style={{flex:1,flexDirection:'row'}}>
+        <View style={{flexDirection:'row'}}>
         <TouchableOpacity style={[styles.nextBtn,{marginRight:100}]} 
           onPress={()=>props.navigation.goBack()}
         >
@@ -66,7 +74,7 @@ function PasswordScreen(props) {
 }
   
 
-export default PasswordScreen;
+export default WithUser(PasswordScreen);
 
 const styles = StyleSheet.create({  
   logoView:{   
