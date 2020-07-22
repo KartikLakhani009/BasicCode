@@ -1,0 +1,13 @@
+
+POST https://test.basiscode.net/api/mobileApp/v2/auth/verifyEmail
+Content-Type: application/json
+
+{"email": "manan.kansara@bacancytechnology.com"}
+
+
+###
+POST https://test.basiscode.net/api/mobileApp/v2/auth/verifyPassword
+Content-Type: application/json
+
+
+{"password": "Test@123","UserName": "manan.kansara@bacancytechnology.com"}

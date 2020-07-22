@@ -9,7 +9,7 @@ import Logo from '../component/AppLogoFun'
 function SplashScreen(){
     return(
         <View style={styles.container}>
-           <Logo/>
+           <Logo logoStyle={styles.logoView}/>
         </View>
     )
 }

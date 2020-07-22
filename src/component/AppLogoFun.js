@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { View, Image,StyleSheet } from 'react-native';
 
-function Logo() {
+import {AppImages} from '../images/index'
+import AppStyle from '../config/AppStyle' 
+
+
+function Logo(props) {
     return (
-        <View style={styles.logoView}>
+        <View style={props.logoStyle}>
                 <Image source={
                     AppImages.AppLogo
-                }  />
+                } style={{width:150,height:80}} />
             </View>
     );
 }

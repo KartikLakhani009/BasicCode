@@ -8,29 +8,51 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 //Screens
 import HomeScreen from '../screen/HomeScreen';
 import SplashScreen from '../screen/SplashScreen';
+import PasswordScreen from '../screen/PasswordScreen';
+import LoginScreen from '../screen/LoginScreen';
+
 
 //other files
-import { USER_TOKEN } from '../config/GlobalStatics'
+import { USER } from '../config/GlobalStatics'
 
 const Stack = createStackNavigator();
 
 function AppNavigator() {
   const [isLoading, setLoading] = useState(true);
-  const [isUser,getUser] = useState(null);
+  const [isUser,setUser] = useState(null);
 
   useEffect(() => {
 
   
-     getUser(await AsyncStorage.getItem(USER_TOKEN)
-     .catch(e=>console.log("Async Storage Error occur : ",e)));
-    
+    const check =  async () => {
+      // const value = { uid: 100, email: 'abc@z.in', validToken: false };
+
+      // console.log('user :', value);
+      // await AsyncStorage.setItem(USER, JSON.stringify(value)).catch((e) =>
+      //   console.log('Storage add error : ', e)
+      // );
+
+      await AsyncStorage.getItem(USER)
+        .then((json) => {
+          if (json != null) setUser(JSON.parse(json));
+          else setUser(null);
+        })
+        .catch((e) => {
+          console.log('Async Storage Error occur : ', e);
+          setUser(null);
+        });
+      }
+    check();
+
   setTimeout(() => {
     if (isLoading == true) {
       setLoading(false);
     }
   }, 3000);
     
-  });
+  console.log("Loading value :  ", isLoading);
+
+  },[isLoading]);
 
   if(isLoading ==true)
   {
@@ -38,14 +60,20 @@ function AppNavigator() {
   }
   
   return (
-    <NavigationContainer>
-    
-      <Stack.Navigator>
-      {isUser!=null?(isUser.validToken != null?
-      ( <Stack.Screen name="Home" component={HomeScreen} />)
+    <NavigationContainer>    
+      <Stack.Navigator headerMode={'none'} 
+      initialRouteName ={isUser!=null?
+      (isUser.validToken != null?("Home"):("PasswordScreen"))
+      :("Login")}
+      // initialRouteName={"PasswordScreen"}
+      >
+      {/* {isUser!=null?(isUser.validToken != null?
+      (<Stack.Screen name="Home" component={HomeScreen} />)
       :(<Stack.Screen name="PasswordScreen" component={PasswordScreen} />))
-      :(<Stack.Screen name="Login" component={LoginScreen} />)}
-       
+      :(<Stack.Screen name="Login" component={LoginScreen} />)}       */}
+      <Stack.Screen name="Home" component={HomeScreen} /> 
+      <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
