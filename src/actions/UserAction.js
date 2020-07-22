@@ -1,9 +1,10 @@
 import {VERIFY_EMAIL_ACTION,VERIFY_EMAIL_PATH,VERIFY_PASS_ACTION,
-  VERIFY_PASS_PATH,INVALIDE_DATA_ACTION,REQUEST_ERROR_ACTION} from '../config/GlobalStatics';
+  VERIFY_PASS_PATH,INVALIDE_DATA_ACTION,REQUEST_ERROR_ACTION,SET_ERROR_TRUE} from '../config/GlobalStatics';
 
 import { Alert } from 'react-native';
 
 import API from '../lib/API/index';
+import { FlatList } from 'react-native-gesture-handler';
 
 export const Fetch_Email = (data) => {
   return async dispatch => {      
@@ -13,18 +14,12 @@ export const Fetch_Email = (data) => {
         console.log(json);
         if(!json.ok)
         {
+          Alert.alert("Login Failed", "Please enter correct email provide by BasicCode complaince");
           dispatch({
             type:REQUEST_ERROR_ACTION,
             payload:json,
           })
-        }
-        if(json.title !="success")
-        {
-          dispatch({
-            type:INVALIDE_DATA_ACTION,
-            payload:json,
-          })
-        }
+        }       
        else{ 
          dispatch({
           type: VERIFY_EMAIL_ACTION,
@@ -33,38 +28,44 @@ export const Fetch_Email = (data) => {
       }
       })
       .catch(error =>{ 
-        dispatch({
-          type:REQUEST_ERROR_ACTION,
-          payload:error,
-        })
+        Alert.alert("Login Failed", "Please enter correct email provide by BasicCode complaince");
+        // dispatch({
+        //   type:REQUEST_ERROR_ACTION,
+        //   payload:error,
+        // })
         console.error('error', error) 
       });
   };
 };
 
-export const Fetch_Pass = (data) => {
+export const Fetch_Pass = (data,callback) => {
+  let status = false;
     return async dispatch => {      
       await API(VERIFY_PASS_PATH, data, 'post', null)
         .then(json => {
           console.log('called Action');
           console.log(json);
           if(!json.ok)
-          {
+          {            
             Alert.alert("Login Failed", "Please enter correct password provide by BasicCode complaince");
-            dispatch({
-              type:REQUEST_ERROR_ACTION,
-              payload:json,
-            })
+            // dispatch({
+            //   type:REQUEST_ERROR_ACTION,
+            //   payload:json,
+            // })
+            callback({json,status});
           }          
          else{ 
+          status = true;
            dispatch({
             type: VERIFY_PASS_ACTION,
             payload: json,
           });
+          callback({json,status});
         }
         })
         .catch(error =>{
           console.error('error', error);
+          callback({error,status});
           Alert.alert("Login Failed", "Please enter correct password provide by BasicCode complaince");
           // dispatch({
           //   type:REQUEST_ERROR_ACTION,
@@ -73,3 +74,10 @@ export const Fetch_Pass = (data) => {
         });
     };
   };
+
+export const Set_Error_true=()=>{
+  return{
+    type: SET_ERROR_TRUE,
+    payload: true,
+  }
+}

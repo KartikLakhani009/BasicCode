@@ -1,4 +1,4 @@
-import React, {useState, useEffectf, useEffect} from 'react';
+import React, {useState,  useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -10,7 +10,10 @@ import HomeScreen from '../screen/HomeScreen';
 import SplashScreen from '../screen/SplashScreen';
 import PasswordScreen from '../screen/PasswordScreen';
 import LoginScreen from '../screen/LoginScreen';
+import AuthScreen from '../screen/AuthScrren';
 
+//Practices 
+import LoginPractice from '../Practice/LoginScreen'
 
 //other files
 import { USER } from '../config/GlobalStatics'
@@ -74,6 +77,8 @@ function AppNavigator() {
       <Stack.Screen name="Home" component={HomeScreen} /> 
       <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="LoginPractice" component={LoginPractice} />
+      <Stack.Screen name="AuthScreen" userData={isUser} component={AuthScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

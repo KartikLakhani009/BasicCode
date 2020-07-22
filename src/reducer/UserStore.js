@@ -1,5 +1,5 @@
 import {VERIFY_EMAIL_ACTION,VERIFY_EMAIL_PATH,VERIFY_PASS_ACTION,
-  VERIFY_PASS_PATH, INVALIDE_DATA_ACTION, REQUEST_ERROR_ACTION} from '../config/GlobalStatics';
+  VERIFY_PASS_PATH, INVALIDE_DATA_ACTION, REQUEST_ERROR_ACTION , SET_ERROR_TRUE} from '../config/GlobalStatics';
 
 const data = {
   user: [], 
@@ -13,10 +13,10 @@ export default (state = data, action) => {
   switch (action.type) {
     case VERIFY_EMAIL_ACTION:     
 
-      let d = action.payload.json;
-      console.log('Before d : ', d);
+      let emailAddress = action.payload.json;
+      console.log('Before emailAddress : ', emailAddress);
 
-      return {...state, temp: d}; 
+      return {...state, temp: emailAddress}; 
 
     case VERIFY_PASS_ACTION:
       let user = action.payload.json;     
@@ -37,6 +37,9 @@ export default (state = data, action) => {
       console.log('date fault  : ', error);
 
       return {...state, error: error,errorStatus:true}; 
+
+    case SET_ERROR_TRUE:
+      return {...state, errorStatus:action.payload};
 
     default:
       return state;

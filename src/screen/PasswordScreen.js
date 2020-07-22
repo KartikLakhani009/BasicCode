@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { View, Text , StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import Logo from '../component/AppLogoFun'
 import AppStyle from '../config/AppStyle'
@@ -31,15 +32,16 @@ function PasswordScreen(props) {
     const data = {"password":password,"UserName":Username};
     console.log("data L: ",data);
 
-    const a  = await VerifyPassReq(data);
+    const a = await VerifyPassReq(data,new Promise(null,null))
+    // useDispatch( VerifyPassReq(data));
     console.log(" a : ",a );
-    if(UserData.errorStatus == true)
-    {
-      setsuggestion('Enter the valid password used within BasicCode Complaince');
-    }
-    else{
-      navigate("Home");
-    }
+    // if(UserData.errorStatus == true)
+    // {
+    //   setsuggestion('Enter the valid password used within BasicCode Complaince');
+    // }
+    // else{
+    //   navigate("Home");
+    // }
     
   }
 
