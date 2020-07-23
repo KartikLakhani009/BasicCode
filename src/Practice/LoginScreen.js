@@ -1,14 +1,11 @@
-import  React,{useState,useEffect} from 'react';
+import  React,{useState,useEffect, useCallback} from 'react';
 import { View, Text, StyleSheet ,TextInput, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Logo from '../component/AppLogoFun'
 import AppStyle from '../config/AppStyle'
 
-import API from '../lib/API/index'
-import { VERIFY_EMAIL_PATH } from '../config/GlobalStatics'
-
-import WithUser from '../hoc/WithUser'
+import { login} from '../actions/DemoEmailVerify';
+import { useDispatch, connect} from 'react-redux';
 
 function LoginPractice(props) {
 
@@ -16,63 +13,57 @@ function LoginPractice(props) {
 
   const [suggest,setsuggestion] = useState(null);  
  
+
+  const dispatch = useDispatch();
   // console.log("Para : ",props);
 
 
   useEffect(()=>{
-    const  { UserData : {error,errorStatus}} = props;
+    const  { UserData : {error,errorStatus,isEmail},navigation:{navigate}} = props;
   
     if(errorStatus==true)
     {
       setsuggestion('Enter the valid password used within BasicCode Complaince');
     }
+    else if(isEmail == true){
+      navigate("Home");
+    }
   
     },[suggest]);
-
-
-  const verifyEmail = async()=>{
-    let data = {"email":email};
-    
-    const { navigation:{navigate}, VerifyEmailReq, UserData, SetError } = props;
-
-    const a  = await VerifyEmailReq(data);
-    console.log(" a : ",a );
-    if(UserData.errorStatus == true)
-    {
-      setsuggestion('Enter the valid password used within BasicCode Complaince');
-    }
-    else{
-      navigate("PasswordScreen");
-      SetError(true);
-    }
-
-  }
 
 
     return (
       <View style={{ flex: 1,backgroundColor:AppStyle.COLOR.WHITE}}>
        <Logo logoStyle= {[styles.logoView,{broderWidth:2}]} />
        <View style={styles.emailView}>
-        <TextInput placeholder="Enter your email" 
-        keyboardType={'email-address'}
-        autoCapitalize={'none'}
-        value={email} onChangeText={text=>setEmail(text)} style={styles.emailInput} />
-        <TouchableOpacity style={styles.nextBtn} onPress={verifyEmail}>
-          <Text style={styles.nextText}>Next</Text>
-        </TouchableOpacity>
-        {suggest != null?(
-        <View style={styles.suggestView}>
-          <Text style={styles.suggestText}>{suggest}</Text>
-        </View>):null
-        }
+          <TextInput placeholder="Enter your email" 
+          keyboardType={'email-address'}
+          autoCapitalize={'none'}
+          value={email} onChangeText={text=>setEmail(text)} style={styles.emailInput} />
+          <Text>This is practices screen</Text>
+          <TouchableOpacity style={styles.nextBtn} onPress={() =>
+          dispatch(login({'email':email}))}>
+            <Text style={styles.nextText}>Next</Text>
+          </TouchableOpacity>
+          {suggest != null?(
+          <View style={styles.suggestView}>
+            <Text style={styles.suggestText}>{suggest}</Text>
+          </View>):null
+          }
         </View>
         
       </View>
     );
 }
   
+const mapStateToProps = state => {
+  return {
+    UserData: state.USERSTORE,
+  };
+};
 
-export default WithUser(LoginPractice);
+export default connect(mapStateToProps,null)(LoginPractice);
+// export default LoginPractice;
 
 
 const styles = StyleSheet.create({  

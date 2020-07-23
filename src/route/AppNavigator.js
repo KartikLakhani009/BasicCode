@@ -67,7 +67,7 @@ function AppNavigator() {
       <Stack.Navigator headerMode={'none'} 
       initialRouteName ={isUser!=null?
       (isUser.validToken != null?("Home"):("PasswordScreen"))
-      :("Login")}
+      :("LoginPractice")}
       // initialRouteName={"PasswordScreen"}
       >
       {/* {isUser!=null?(isUser.validToken != null?

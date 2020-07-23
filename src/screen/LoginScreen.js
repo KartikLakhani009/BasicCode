@@ -8,6 +8,7 @@ import AppStyle from '../config/AppStyle'
 import API from '../lib/API/index'
 import { VERIFY_EMAIL_PATH } from '../config/GlobalStatics'
 
+
 function LoginScreen(props) {
 
   const [email,setEmail] = useState('');
@@ -38,9 +39,25 @@ function LoginScreen(props) {
     .catch(e=>{
       console.log("Verify Email Erorr: ",e);
       setsuggestion('Enter the email address used within BasicCode Complaince');
-  })
+   })
   }
 
+  const verifyEmailtoaction = async ()=>{
+    const { navigation:{navigate}, VerifyEmailReq, UserData } = props;
+
+    let data = {"email":email};
+
+    const a = await VerifyEmailReq(data,new Promise(null,null))
+    // useDispatch( VerifyPassReq(data));
+    console.log(" a : ",a );
+    // if(UserData.errorStatus == true)
+    // {
+    //   setsuggestion('Enter the valid password used within BasicCode Complaince');
+    // }
+    // else{
+    //   navigate("Home");
+    // }
+  }
 
     return (
       <View style={{ flex: 1,backgroundColor:AppStyle.COLOR.WHITE}}>
@@ -50,7 +67,7 @@ function LoginScreen(props) {
         keyboardType={'email-address'}
         autoCapitalize={'none'}
         value={email} onChangeText={text=>setEmail(text)} style={styles.emailInput} />
-        <TouchableOpacity style={styles.nextBtn} onPress={verifyEmail}>
+        <TouchableOpacity style={styles.nextBtn} onPress={verifyEmailtoaction}>
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
         {suggest != null?(

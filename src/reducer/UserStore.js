@@ -1,4 +1,4 @@
-import {VERIFY_EMAIL_ACTION,VERIFY_EMAIL_PATH,VERIFY_PASS_ACTION,
+import {VERIFY_EMAIL_ACTION,VERIFY_EMAIL_PATH,VERIFY_PASS_ACTION, DEMO_EMAIL_VERIFY,
   VERIFY_PASS_PATH, INVALIDE_DATA_ACTION, REQUEST_ERROR_ACTION , SET_ERROR_TRUE} from '../config/GlobalStatics';
 
 const data = {
@@ -6,6 +6,7 @@ const data = {
   temp: [],
   error:null,
   errorStatus:false,
+  isEmail:false,
 };
 
 export default (state = data, action) => {
@@ -40,6 +41,13 @@ export default (state = data, action) => {
 
     case SET_ERROR_TRUE:
       return {...state, errorStatus:action.payload};
+
+    case DEMO_EMAIL_VERIFY:
+      return {
+        ...state,
+        ...action.payload, 
+        isEmail: true, 
+      };
 
     default:
       return state;

@@ -3,7 +3,7 @@ import {Fetch_Email,Fetch_Pass, Set_Error_true} from '../actions';
 
 const mapDispatchToProps = dispatch => ({
 
-  VerifyEmailReq: email => dispatch(Fetch_Email(email)),
+  VerifyEmailReq: (email,callback) => dispatch(Fetch_Email(email,callback)),
 
   VerifyPassReq: pass => dispatch(Fetch_Pass(pass,callback)),
 
