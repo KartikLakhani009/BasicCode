@@ -13,24 +13,39 @@ function LoginPractice(props) {
 
   const [suggest,setsuggestion] = useState(null);  
  
+  const [UserData,setUserD] = useState(null);
 
   const dispatch = useDispatch();
   // console.log("Para : ",props);
 
 
-  useEffect(()=>{
-    const  { UserData : {error,errorStatus,isEmail},navigation:{navigate}} = props;
+  // useEffect(()=>{
+  //   const  { UserData : {error,errorStatus,isEmail},navigation:{navigate}} = props;
   
-    if(errorStatus==true)
-    {
-      setsuggestion('Enter the valid password used within BasicCode Complaince');
-    }
-    else if(isEmail == true){
-      navigate("Home");
-    }
+  //   if(UserData.title =="succes")
+  //   {
+  //     navigate("Home");      
+  //   }
+  //   else {
+  //     setsuggestion('Enter the valid password used within BasicCode Complaince');
+  //   }
   
-    },[suggest]);
+  //   },[suggest]);
 
+
+    const callback = (data)=>{
+      // const {navigation:{navigate}} = props;
+      console.log("datta from api :",data);
+      if(data.IsPresent == true)
+      {
+          setUserD(data);
+          return props.navigation.navigate("Home");
+      }
+      else{
+        setsuggestion('Enter the valid password used within BasicCode Complaince');
+        return null;
+      }
+    }
 
     return (
       <View style={{ flex: 1,backgroundColor:AppStyle.COLOR.WHITE}}>
@@ -42,7 +57,7 @@ function LoginPractice(props) {
           value={email} onChangeText={text=>setEmail(text)} style={styles.emailInput} />
           <Text>This is practices screen</Text>
           <TouchableOpacity style={styles.nextBtn} onPress={() =>
-          dispatch(login({'email':email}))}>
+          dispatch(login({'email':email},callback))}>
             <Text style={styles.nextText}>Next</Text>
           </TouchableOpacity>
           {suggest != null?(

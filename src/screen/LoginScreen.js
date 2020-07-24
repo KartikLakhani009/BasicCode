@@ -42,23 +42,6 @@ function LoginScreen(props) {
    })
   }
 
-  const verifyEmailtoaction = async ()=>{
-    const { navigation:{navigate}, VerifyEmailReq, UserData } = props;
-
-    let data = {"email":email};
-
-    const a = await VerifyEmailReq(data,new Promise(null,null))
-    // useDispatch( VerifyPassReq(data));
-    console.log(" a : ",a );
-    // if(UserData.errorStatus == true)
-    // {
-    //   setsuggestion('Enter the valid password used within BasicCode Complaince');
-    // }
-    // else{
-    //   navigate("Home");
-    // }
-  }
-
     return (
       <View style={{ flex: 1,backgroundColor:AppStyle.COLOR.WHITE}}>
        <Logo logoStyle= {[styles.logoView,{broderWidth:2}]} />
@@ -67,7 +50,7 @@ function LoginScreen(props) {
         keyboardType={'email-address'}
         autoCapitalize={'none'}
         value={email} onChangeText={text=>setEmail(text)} style={styles.emailInput} />
-        <TouchableOpacity style={styles.nextBtn} onPress={verifyEmailtoaction}>
+        <TouchableOpacity style={styles.nextBtn} onPress={verifyEmail}>
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
         {suggest != null?(

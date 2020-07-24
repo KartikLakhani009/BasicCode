@@ -5,9 +5,7 @@ const mapDispatchToProps = dispatch => ({
 
   VerifyEmailReq: (email,callback) => dispatch(Fetch_Email(email,callback)),
 
-  VerifyPassReq: pass => dispatch(Fetch_Pass(pass,callback)),
-
-  SetError:value=>dispatch(Set_Error_true(value)),
+  VerifyPassReq: (pass,callback) => dispatch(Fetch_Pass(pass,callback)),
 
 });
 

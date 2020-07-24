@@ -1,12 +1,10 @@
 import React,{useState,useEffect} from 'react';
 import { View, Text , StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import { useDispatch } from 'react-redux';
 
 import Logo from '../component/AppLogoFun'
 import AppStyle from '../config/AppStyle'
 
 import WithUser from '../hoc/WithUser'
-
 
 function PasswordScreen(props) {
 
@@ -14,35 +12,30 @@ function PasswordScreen(props) {
 
   const [suggest,setsuggestion] = useState(null);
 
+  const [UserData,setUserD] = useState(null);
+
   console.log("Password Para : ", props);
 
-  useEffect(()=>{
-  const  { UserData : {error,errorStatus}} = props;
-
-  if(errorStatus==true)
-  {
-    setsuggestion('Enter the valid password used within BasicCode Complaince');
-  }
-
-  },[suggest]);
-
-  const verifypassword = async()=>{
-    const { navigation:{navigate},route:{ params:{email:{Username}}}, VerifyPassReq, UserData } = props;
+  const verifypassword = ()=>{
+    const { route:{ params:{email:{Username}}}, VerifyPassReq } = props;
 
     const data = {"password":password,"UserName":Username};
     console.log("data L: ",data);
 
-    const a = await VerifyPassReq(data,new Promise(null,null))
-    // useDispatch( VerifyPassReq(data));
-    console.log(" a : ",a );
-    // if(UserData.errorStatus == true)
-    // {
-    //   setsuggestion('Enter the valid password used within BasicCode Complaince');
-    // }
-    // else{
-    //   navigate("Home");
-    // }
-    
+    VerifyPassReq(data,callback);    
+  }
+
+  const callback = (data)=>{
+    console.log("datta from api :",data);
+    if(data.isLoggedIn == true)
+    {
+        setUserD(data);
+        props.navigation.navigate("Home");
+    }
+    else{
+      setsuggestion('Enter the valid password used within BasicCode Complaince');
+      // return null;
+    }
   }
 
     return (

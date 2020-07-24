@@ -67,7 +67,7 @@ function AppNavigator() {
       <Stack.Navigator headerMode={'none'} 
       initialRouteName ={isUser!=null?
       (isUser.validToken != null?("Home"):("PasswordScreen"))
-      :("LoginPractice")}
+      :("Login")}
       // initialRouteName={"PasswordScreen"}
       >
       {/* {isUser!=null?(isUser.validToken != null?
@@ -77,8 +77,8 @@ function AppNavigator() {
       <Stack.Screen name="Home" component={HomeScreen} /> 
       <Stack.Screen name="PasswordScreen" component={PasswordScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="LoginPractice" component={LoginPractice} />
-      <Stack.Screen name="AuthScreen" userData={isUser} component={AuthScreen} />
+      {/* <Stack.Screen name="LoginPractice" component={LoginPractice} /> */}
+      {/* <Stack.Screen name="AuthScreen" userData={isUser} component={AuthScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

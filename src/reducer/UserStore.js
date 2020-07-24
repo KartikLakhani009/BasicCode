@@ -6,7 +6,7 @@ const data = {
   temp: [],
   error:null,
   errorStatus:false,
-  isEmail:false,
+  isEmail:null,
 };
 
 export default (state = data, action) => {
@@ -14,13 +14,13 @@ export default (state = data, action) => {
   switch (action.type) {
     case VERIFY_EMAIL_ACTION:     
 
-      let emailAddress = action.payload.json;
+      let emailAddress = action.payload;
       console.log('Before emailAddress : ', emailAddress);
 
       return {...state, temp: emailAddress}; 
 
     case VERIFY_PASS_ACTION:
-      let user = action.payload.json;     
+      let user = action.payload;     
       console.log("USer : ",user);
       
       return {...state, user:user};
@@ -45,8 +45,7 @@ export default (state = data, action) => {
     case DEMO_EMAIL_VERIFY:
       return {
         ...state,
-        ...action.payload, 
-        isEmail: true, 
+        isEmail:action.payload,  
       };
 
     default:
