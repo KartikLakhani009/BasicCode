@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     color:'#fff',
     justifyContent:'center',
     alignItems:'center',
-    marginTop:8,
+    marginTop:4,
     fontSize:AppStyle.fontSizeH3,
         
   },
