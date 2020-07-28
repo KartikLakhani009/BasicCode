@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createDrawerNavigator} from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-community/async-storage';
-import { StyleSheet, Button,TouchableOpacity} from 'react-native';
+import { StyleSheet,View,Text} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -21,35 +21,43 @@ import DrawerContent from '../component/DrawerItems'
 
 //other files
 import { USER } from '../config/GlobalStatics'
+import AppStyle from '../config/AppStyle';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+const headerTitle = (Title)=>(<View>
+  <Text style={{color:AppStyle.COLOR.WHITE_OFF, fontSize:AppStyle.fontSizeH3, 
+  textAlign:'center',fontWeight:'bold'}}>
+  {Title}</Text>
+  <Text style={{color:AppStyle.COLOR.WHITE_OFF, fontSize:AppStyle.fontSizeH4_5}}>
+  BasisCode Complinace</Text>
+</View>
+);
+
 const Screens = ({ navigation }) => {
   return (
       <Stack.Navigator
+      
         screenOptions={{
+          // headerBackground:
+          headerStyle:{backgroundColor:AppStyle.COLOR.Sacramento_Green},
+          headerTitleStyle: { color:AppStyle.COLOR.WHITE_OFF },
+          headerTitleAlign:'center',
           headerRight: () => (
             <Icon.Button
                 name="menu"
-                size={18} color="black"
+                size={25} color={AppStyle.COLOR.WHITE_OFF}
+                backgroundColor="transparent"
                 onPress={() => navigation.openDrawer()}
               />
           )
-          
-          // (
-          //   <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          //     <Feather name="menu" size={18} color="black" style={{ paddingHorizontal: 10 }} />
-          //   </TouchableOpacity>
-          // )
         }}>
-        <Stack.Screen name="Home">{props => <HomeScreen {...props} />}</Stack.Screen>
-        <Stack.Screen name="Welcome">{props => <WelcomeScreen {...props} />}</Stack.Screen>
+        <Stack.Screen name="Home" options={{title:headerTitle("Home")}}>{props => <HomeScreen {...props} />}</Stack.Screen>
+        <Stack.Screen name="Welcome" options={{title:headerTitle("Welcome")}} >{props => <WelcomeScreen {...props} />}</Stack.Screen>
       </Stack.Navigator>
   );
 };
-
-const drawerStyles = { flex: 1, width: '50%', backgroundColor: 'transparent' }
 
 function AppNavigator() {
   const [isLoading, setLoading] = useState(true);
@@ -116,14 +124,14 @@ function AppNavigator() {
           initialRouteName="Welcome"
           drawerType="front"
           overlayColor="transparent"
-          drawerStyle={{drawerStyles}}
+          drawerStyle={styles.drawerStyles}
           contentContainerStyle={{ flex: 1 }}
           drawerContentOptions={{
             activeBackgroundColor: 'transparent',
             activeTintColor: 'white',
             inactiveTintColor: 'white',
           }}
-          // sceneContainerStyle={{ backgroundColor: 'transparent' }}
+          sceneContainerStyle={{ backgroundColor: 'transparent' }}
           drawerContent={props => 
             <DrawerContent {...props} />}
           
@@ -152,5 +160,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     // overflow: 'scroll',
     // borderWidth: 1,
+  },
+  drawerStyles :
+  { 
+    flex: 1, 
+    width: '70%', 
+    backgroundColor: AppStyle.COLOR.GREY_DARK ,
   },
 });

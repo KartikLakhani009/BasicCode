@@ -27,9 +27,9 @@ const APP_FONTS = {
     : 'NunitoSans-ExtraBold',
 };
 export default {
-  countPixelRatio: size => size * ratioCount,
-  responsiveHeight: size => size * heightPer,
-  responsiveWidth: size => size * widthPer,
+  countPixelRatio: (size) => size * ratioCount,
+  responsiveHeight: (size) => size * heightPer,
+  responsiveWidth: (size) => size * widthPer,
   fontSizeH1: (deviceType == 'phone' ? 36 : 48) * ratioCount,
   fontSizeH1_2: (deviceType == 'phone' ? 33 : 42) * ratioCount,
   fontSizeH2: (deviceType == 'phone' ? 28 : 33) * ratioCount,
@@ -37,11 +37,12 @@ export default {
   fontSizeH3: (deviceType == 'phone' ? 20 : 23) * ratioCount,
   fontSizeH3_4: (deviceType == 'phone' ? 17 : 20) * ratioCount,
   fontSizeH4: (deviceType == 'phone' ? 15 : 17) * ratioCount,
+  fontSizeH4_51: (deviceType == 'phone' ? 13.5 : 16.5) * ratioCount,
   fontSizeH4_5: (deviceType == 'phone' ? 12 : 15) * ratioCount,
   fontSizeH5: (deviceType == 'phone' ? 8 : 10) * ratioCount,
   fontSizeParagraph: (deviceType == 'phone' ? 14 : 16) * ratioCount,
 
-  getFont: type => {
+  getFont: (type) => {
     switch (type) {
       case 'light':
         return APP_FONTS.NANITOSANS_LIGHT;
@@ -124,6 +125,7 @@ export default {
     YELLOW_RATING: '#FAAE32',
     ROCK_BLUE: '#959FB0',
 
+    Sacramento_Green: '#043927',
     PARROT: '#398215',
 
     PURPLE_VIVID: '#6E0F8F',
