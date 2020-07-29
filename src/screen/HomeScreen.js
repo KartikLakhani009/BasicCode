@@ -30,29 +30,41 @@ function HomeScreen() {
 
       <FlatList
         data={HomeButtons}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         style={{marginTop: '15%'}}
         renderItem={({item}) => (
           <TouchableOpacity
             style={[
               styles.boxBtn,
+
               {backgroundColor: item.bgColor, shadowColor: item.bgColor},
-            ]}>
+            ]}
+            // onPress={() => {
+            //   props.navigation.navigate(item.navigate);
+            // }}
+          >
             <Icon
-              style={{alignSelf: 'center', marginLeft: 20}}
+              style={{
+                marginLeft: 20,
+                height: AppStyle.countPixelRatio(30),
+                width: AppStyle.countPixelRatio(30),
+                // borderWidth: 2,
+                alignItems: 'center',
+                paddingTop: AppStyle.countPixelRatio(7),
+              }}
               color={AppStyle.COLOR.WHITE_OFF}
               name={item.iconName}
-              size={18}
+              size={20}
             />
-            <Text
-              style={{
-                textAlign: 'center',
-                color: AppStyle.COLOR.WHITE_OFF,
-                alignSelf: 'center',
-                marginLeft: 20,
-              }}>
-              {item.title}
-            </Text>
+            <View>
+              <Text
+                style={{
+                  color: AppStyle.COLOR.BLACK,
+                  marginLeft: 10,
+                }}>
+                {item.title}
+              </Text>
+            </View>
           </TouchableOpacity>
         )}
       />
@@ -65,9 +77,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   boxBtn: {
     flexDirection: 'row',
-    margin: 10,
-    minWidth: AppStyle.responsiveWidth(45),
-    height: AppStyle.countPixelRatio(30),
+    margin: 8,
+    minWidth: AppStyle.countPixelRatio(200),
+    height: AppStyle.countPixelRatio(35),
     alignItems: 'center',
     // justifyContent: 'center',
     display: 'flex',

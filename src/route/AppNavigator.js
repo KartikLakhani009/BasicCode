@@ -9,6 +9,8 @@ import AuthRoute from './AuthRoute';
 
 import SplashScreen from '../screen/SplashScreen';
 
+const Stack = createStackNavigator();
+
 //other files
 import {USER} from '../config/GlobalStatics';
 
@@ -18,7 +20,7 @@ function AppNavigator() {
 
   useEffect(() => {
     const check = async () => {
-      // const value = { uid: 100, email: 'abc@z.in', validToken: false };
+      const value = {uid: 100, email: 'abc@z.in', validToken: true};
 
       // console.log('user :', value);
       // await AsyncStorage.setItem(USER, JSON.stringify(value)).catch((e) =>
@@ -35,7 +37,10 @@ function AppNavigator() {
           setUser(null);
         });
     };
-    check();
+    // check();
+
+    // const value = {uid: 100, email: 'abc@z.in', validToken: true};
+    // setUser(value);
 
     // setTimeout(() => {
     //   if (isLoading == true) {
@@ -46,13 +51,19 @@ function AppNavigator() {
     console.log('Loading value :  ', isLoading);
   }, [isLoading]);
 
-  // if(isLoading ==true)
-  // {
-  //   return <SplashScreen/>
+  // if (isLoading == true) {
+  //   return <SplashScreen />;
   // }
 
   return (
     <NavigationContainer>
+      {/* <Stack.Navigator>
+        <Stack.Screen name="Auth" initialParams={{user: isUser}}>
+          {/* here is user parameter passing problem  *
+          {(props) => <AuthRoute {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Drawer" component={DrawerNav} />
+      </Stack.Navigator> */}
       <DrawerNav />
     </NavigationContainer>
   );

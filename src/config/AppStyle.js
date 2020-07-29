@@ -33,6 +33,7 @@ export default {
   fontSizeH1: (deviceType == 'phone' ? 36 : 48) * ratioCount,
   fontSizeH1_2: (deviceType == 'phone' ? 33 : 42) * ratioCount,
   fontSizeH2: (deviceType == 'phone' ? 28 : 33) * ratioCount,
+  fontSizeH2_31: (deviceType == 'phone' ? 25 : 30.5) * ratioCount,
   fontSizeH2_3: (deviceType == 'phone' ? 24 : 28) * ratioCount,
   fontSizeH3: (deviceType == 'phone' ? 20 : 23) * ratioCount,
   fontSizeH3_4: (deviceType == 'phone' ? 17 : 20) * ratioCount,
