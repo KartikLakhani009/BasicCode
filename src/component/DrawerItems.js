@@ -105,7 +105,6 @@ const DrawerContent = (props) => {
         data={personalItem}
         keyExtractor={(item) => item.id}
         scrollEnabled={false}
-        style={{marginTop: -5}}
         renderItem={({item}) => (
           <TouchableOpacity
             style={[styles.boxBtn]}
@@ -162,7 +161,7 @@ export default DrawerContent;
 
 const styles = StyleSheet.create({
   separateBlack: {
-    height: AppStyle.countPixelRatio(42),
+    height: AppStyle.countPixelRatio(43),
     backgroundColor: AppStyle.COLOR.BLACK,
   },
   drawerSection: {

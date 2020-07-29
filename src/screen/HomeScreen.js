@@ -50,7 +50,7 @@ function HomeScreen() {
                 width: AppStyle.countPixelRatio(30),
                 // borderWidth: 2,
                 alignItems: 'center',
-                paddingTop: AppStyle.countPixelRatio(7),
+                paddingTop: AppStyle.countPixelRatio(6),
               }}
               color={AppStyle.COLOR.WHITE_OFF}
               name={item.iconName}
@@ -59,7 +59,7 @@ function HomeScreen() {
             <View>
               <Text
                 style={{
-                  color: AppStyle.COLOR.BLACK,
+                  color: AppStyle.COLOR.WHITE_OFF,
                   marginLeft: 10,
                 }}>
                 {item.title}
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   boxBtn: {
     flexDirection: 'row',
     margin: 8,
-    minWidth: AppStyle.countPixelRatio(200),
+    minWidth: AppStyle.countPixelRatio(210),
     height: AppStyle.countPixelRatio(35),
     alignItems: 'center',
     // justifyContent: 'center',
