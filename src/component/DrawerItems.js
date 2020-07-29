@@ -24,7 +24,6 @@ const renderMenu = (data, props) => (
           // marginBottom: -15,
           marginTop: 1,
         }}
-        activeOpacity={1}
         onPress={() => {
           props.navigation.navigate(item.navigate);
         }}>
@@ -47,9 +46,9 @@ const renderMenu = (data, props) => (
             // margin: -10,
             marginBottom: -2.5,
           }}
-          onPress={() => {
-            props.navigation.navigate(item.navigate);
-          }}
+          // onPress={() => {
+          //   props.navigation.navigate(item.navigate);
+          // }}
         />
         <Icon
           name="chevron-right"
@@ -76,7 +75,7 @@ const DrawerContent = (props) => {
       <View style={styles.drawerSection}>
         <View style={{marginLeft: 10}}>
           <LinearTextGradient
-            style={{fontWeight: 'bold', fontSize: 29}}
+            style={{fontWeight: 'bold', fontSize: AppStyle.fontSizeH2_3}}
             locations={[0, 1]}
             colors={['#add8e0', '#aedb8b']}
             start={{x: 0, y: 0}}
@@ -86,7 +85,7 @@ const DrawerContent = (props) => {
           <Text
             style={{
               color: AppStyle.COLOR.WHITE_OFF,
-              fontSize: AppStyle.fontSizeH3_4,
+              fontSize: AppStyle.fontSizeH4,
             }}>
             {'C O M P L I A N C E'}
           </Text>
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   separateBlack: {
-    height: 40,
+    height: AppStyle.countPixelRatio(40),
     backgroundColor: AppStyle.COLOR.BLACK,
   },
   userInfoSection: {

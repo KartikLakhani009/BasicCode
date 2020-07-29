@@ -143,5 +143,7 @@ export default {
     GREEN_LIGHT: '#CCD131',
     YELLOW_GREEN: '#A7D129',
     GUN_POWDER: '#43425D',
+    LIGTH_COFFE: '#AA9373',
+    COFFEE: '#a27250',
   },
 };
