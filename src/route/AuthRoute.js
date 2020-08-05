@@ -33,13 +33,17 @@ const AuthRoute = (props) => {
 
       // initialRouteName={'DrawerContent'}
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
+      {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
       <Stack.Screen
         name="PasswordScreen"
         component={PasswordScreen}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
       {/* <Stack.Screen name="LoginPractice" component={LoginPractice} /> */}
       {/* <Stack.Screen name="AuthScreen" userData={user} component={AuthScreen} /> */}
     </Stack.Navigator>

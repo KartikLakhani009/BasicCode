@@ -57,14 +57,17 @@ function AppNavigator() {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="Auth" initialParams={{user: isUser}}>
-          {/* here is user parameter passing problem  *
-          {(props) => <AuthRoute {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Drawer" component={DrawerNav} />
-      </Stack.Navigator> */}
-      <DrawerNav />
+      <Stack.Navigator headerMode={'none'}>
+        {isUser && isUser.validToken == true ? (
+          <Stack.Screen name="Drawer" component={DrawerNav} />
+        ) : (
+          <Stack.Screen name="Auth" initialParams={{user: isUser}}>
+            {/* here is user parameter passing problem  */}
+            {(props) => <AuthRoute {...props} />}
+          </Stack.Screen>
+        )}
+      </Stack.Navigator>
+      {/* <DrawerNav /> */}
     </NavigationContainer>
   );
 }
