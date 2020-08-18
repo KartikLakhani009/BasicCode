@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useCallback} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 
 import {DrawerContentScrollView} from '@react-navigation/drawer';
@@ -12,7 +12,11 @@ import {personalItem, userSettings} from '../data/menuItem';
 import AppStyle from '../config/AppStyle';
 import {LinearTextGradient} from 'react-native-text-gradient';
 
-const renderMenu = (item, props, IconComp) => (
+import {AuthContext} from '../route/context';
+
+// const {signOut} = React.useContext(AuthContext);
+
+const renderMenu = (item, props, IconComp, ActionAttach) => (
   <TouchableOpacity
     style={{
       flexDirection: 'row',
@@ -22,7 +26,13 @@ const renderMenu = (item, props, IconComp) => (
       alignItems: 'center',
     }}
     onPress={() => {
-      props.navigation.navigate(item.navigate);
+      if (item.navigate != null) {
+        props.navigation.navigate(item.navigate);
+      } else {
+        // signOut();
+        ActionAttach();
+        console.log('left signOut');
+      }
     }}>
     <IconComp
       name={item.iconName}
@@ -61,6 +71,8 @@ const renderMenu = (item, props, IconComp) => (
 );
 
 const DrawerContent = (props) => {
+  const {signOut} = useContext(AuthContext);
+
   return (
     <DrawerContentScrollView
       {...props}
@@ -150,9 +162,9 @@ const DrawerContent = (props) => {
 
       <View style={[styles.separateBlack]} />
 
-      {renderMenu(userSettings[0], props, SimpleLineIconsIcon)}
-      {renderMenu(userSettings[1], props, Icon)}
-      {renderMenu(userSettings[2], props, Icon)}
+      {renderMenu(userSettings[0], props, SimpleLineIconsIcon, null)}
+      {renderMenu(userSettings[1], props, Icon, null)}
+      {renderMenu(userSettings[2], props, Icon, signOut)}
     </DrawerContentScrollView>
   );
 };

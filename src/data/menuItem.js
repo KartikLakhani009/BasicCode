@@ -76,7 +76,7 @@ export const userSettings = [
     id: 253,
     title: 'Sign out',
     iconName: 'power-off',
-    navigate: 'Home',
+    navigate: null,
     iconSource: 'FontAwesome',
   },
 ];

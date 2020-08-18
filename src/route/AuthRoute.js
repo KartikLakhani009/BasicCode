@@ -8,32 +8,41 @@ import PasswordScreen from '../screen/PasswordScreen';
 import LoginScreen from '../screen/LoginScreen';
 import AuthScreen from '../screen/AuthScrren';
 import WelcomeScreen from '../screen/WelcomeScreen';
+import {CheckBox} from 'react-native';
 
 const Stack = createStackNavigator();
 
 const user = {uid: 100, email: 'abc@z.in', validToken: true};
 
 const AuthRoute = (props) => {
-  // const {
-  //   route: {params: user},
-  // } = props;       // here user fetch parameter problem fix as use
+  const {
+    route: {params: user},
+  } = props; // here user fetch parameter problem fix as use
 
   console.log('User :', user);
   console.log(
     'Contion check : ',
-    user != null
-      ? user.validToken == true
-        ? 'Home'
-        : 'PasswordScreen'
-      : 'Login',
+    user.user != null ? 'PasswordScreen' : 'Login',
   );
-  return (
-    <Stack.Navigator
-      headerMode={'none'}
 
-      // initialRouteName={'DrawerContent'}
-    >
-      {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+  const routeName = user.user != null ? 'PasswordScreen' : 'Login';
+
+  return (
+    <Stack.Navigator headerMode={'none'} initialRouteName={routeName}>
+      {/* {user.user != null ? (
+        <Stack.Screen
+          name="PasswordScreen"
+          component={PasswordScreen}
+          options={{headerShown: false}}
+        />
+      ) : (
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+      )} */}
+
       <Stack.Screen
         name="PasswordScreen"
         component={PasswordScreen}
